@@ -84,7 +84,6 @@ class CanvasBoard extends Board {
 
     if (event.buttons === 1) {
       if (!this.#prevSelectedCell || this.#prevSelectedCell[0] !== row || this.#prevSelectedCell[1] !== column) {
-        this.#drawFilledCell(row, column);
         this.onCellClick(row, column);
       }
     }
@@ -98,7 +97,6 @@ class CanvasBoard extends Board {
     const row = Math.floor(y / this.ui.cellSize);
     const column = Math.floor(x / this.ui.cellSize);
 
-    this.#drawFilledCell(row, column);
     this.onCellClick(row, column);
   }
 }

@@ -9,7 +9,7 @@ class Game {
   #isRunning = false;
 
   initialize() {
-    this.board = new HtmlBoard(this.ui);
+    this.board = new CanvasBoard(this.ui);
     this.board.initialize();
   }
 
