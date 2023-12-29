@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #ecf0f1;
+}
+
+html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
+
+  --color: rgb(12, 53, 71);
+  --born-color: rgb(250, 96, 26);
+  --bg: rgb(175, 216, 248);
+  --bg-light: rgb(202, 230, 253);
+}
+
+
+
+/* App styles */
+.navigation {
+  background-color: #34495e;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.navigation__name {
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+}
+
+.navigation__btn {
+  margin: 0 20px;
+}
+
+.navigation__github {
+  margin-left: auto;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+
+.row {
+  display: flex;
+}
+
+.row .cell {
+  border: 1px solid var(--bg);
+  background-color: white;
+}
+
+.row .cell:hover {
+  background-color: var(--bg-light);
+}
+
+.cell.alive {
+  background-color: var(--color);
+  animation-name: fillAnimation;
+  animation-duration: 0.1s;
+  animation-timing-function: ease-out;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes fillAnimation {
+  0% {
+    transform: scale(0.3);
+    background-color: var(--born-color);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  90% {
+    background-color: var(--born-color);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
