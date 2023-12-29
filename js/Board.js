@@ -69,13 +69,19 @@ class Board {
 
   reset() {
     this.#generation = 0;
-    this.#live.clear();
-    this.#died.clear();
     this.#grid.forEach((row) => {
       row.forEach((cell) => {
+        if (cell.value === 1) {
+          this.#died.add(cell.id);
+        }
         cell.value = 0;
       });
     });
+
+    this.draw();
+
+    this.#live.clear();
+    this.#died.clear();
   }
 
   changeFieldSize() {

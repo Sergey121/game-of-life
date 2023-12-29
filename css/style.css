@@ -55,6 +55,7 @@ a {
 .content {
   width: 100%;
   overflow: scroll;
+  user-select: none;
 }
 
 

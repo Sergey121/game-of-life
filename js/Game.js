@@ -1,5 +1,6 @@
 import { HtmlBoard } from './HtmlBoard';
 import { UI } from './UI';
+import { CanvasBoard } from './CanvasBoard';
 
 class Game {
   ui = new UI(this);
@@ -55,6 +56,12 @@ class Game {
   changeFieldSize() {
     this.reset();
     this.board.changeFieldSize();
+  }
+
+  changeBoardType(value) {
+    this.reset();
+    this.board = value === 'htmlBoard' ? new HtmlBoard(this.ui) : new CanvasBoard(this.ui);
+    this.board.initialize();
   }
 }
 

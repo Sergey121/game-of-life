@@ -71,17 +71,6 @@ class HtmlBoard extends Board {
     });
   }
 
-  reset() {
-    super.reset();
-    this.clear();
-  }
-
-  clear() {
-    this.elements.forEach(e => {
-      e.classList.remove('alive');
-    });
-  }
-
   changeFieldSize() {
     super.changeFieldSize();
     this.initialize();

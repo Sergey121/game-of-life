@@ -41,6 +41,10 @@ class UI {
     this.#resetButton.addEventListener('click', this.#handleResetClick);
     this.#numberOfRowsEl.addEventListener('change', this.#handleChangeRows);
     this.#numberOfColumnsEl.addEventListener('change', this.#handleChangeColumns);
+
+    window.document.querySelectorAll("input[name='board_type']").forEach((el) => {
+      el.addEventListener('change', this.#handleBoardTypeChange);
+    });
   }
 
   #handleStartClick = () => {
@@ -74,6 +78,11 @@ class UI {
     }
     this.#columns = Math.round(value);
     this.#game.changeFieldSize();
+  }
+
+  #handleBoardTypeChange = (event) => {
+    const value = event.target.value;
+    this.#game.changeBoardType(value);
   }
 
   updateGeneration(generation) {
