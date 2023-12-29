@@ -12,6 +12,7 @@ class UI {
   #generationNumberEl = document.getElementById('generationNumber');
   #numberOfRowsEl = document.getElementById('numberOfRows');
   #numberOfColumnsEl = document.getElementById('numberOfColumns');
+  #cellSizeEl = document.getElementById('cellSize');
 
   constructor(game) {
     this.#game = game;
@@ -41,6 +42,7 @@ class UI {
     this.#resetButton.addEventListener('click', this.#handleResetClick);
     this.#numberOfRowsEl.addEventListener('change', this.#handleChangeRows);
     this.#numberOfColumnsEl.addEventListener('change', this.#handleChangeColumns);
+    this.#cellSizeEl.addEventListener('change', this.#handleChangeCellSize);
 
     window.document.querySelectorAll("input[name='board_type']").forEach((el) => {
       el.addEventListener('change', this.#handleBoardTypeChange);
@@ -83,6 +85,15 @@ class UI {
   #handleBoardTypeChange = (event) => {
     const value = event.target.value;
     this.#game.changeBoardType(value);
+  }
+
+  #handleChangeCellSize = (event) => {
+    const value = Number.parseInt(event.target.value);
+    if (Number.isNaN(value)) {
+      return window.alert('Incorrect value.');
+    }
+    this.#cellSize = Math.round(value);
+    this.#game.changeCellSize();
   }
 
   updateGeneration(generation) {

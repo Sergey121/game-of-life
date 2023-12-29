@@ -32,7 +32,7 @@ class CanvasBoard extends Board {
     }
 
     canvas.addEventListener('mousemove', this.#handleMouseMove);
-    canvas.addEventListener('click', this.#handleMouseClick);
+    canvas.addEventListener('mousedown', this.#handleMouseClick);
 
     content.appendChild(canvas);
   }

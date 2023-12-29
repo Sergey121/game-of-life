@@ -63,6 +63,11 @@ class Game {
     this.board = value === 'htmlBoard' ? new HtmlBoard(this.ui) : new CanvasBoard(this.ui);
     this.board.initialize();
   }
+
+  changeCellSize() {
+    this.reset();
+    this.initialize();
+  }
 }
 
 export { Game };
