@@ -13,6 +13,10 @@ class Game {
   }
 
   start() {
+    if (this.#isRunning) {
+      return;
+    }
+
     this.#isRunning = true;
 
     const speed = this.ui.speed;
@@ -39,7 +43,18 @@ class Game {
   }
 
   next() {
-    this.board.next();
+    const generation = this.board.next();
+    this.ui.updateGeneration(generation);
+  }
+
+  reset() {
+    this.board.reset();
+    this.ui.updateGeneration(0);
+  }
+
+  changeFieldSize() {
+    this.reset();
+    this.board.changeFieldSize();
   }
 }
 

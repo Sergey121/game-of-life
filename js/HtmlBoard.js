@@ -11,9 +11,14 @@ class HtmlBoard extends Board {
     const rows = this.ui.rows;
     const cellSize = this.ui.cellSize;
 
+    this.elements.length = 0;
+
+    const content = document.getElementById('content');
+    content.innerHTML = '';
+
     const container = document.createElement('div');
 
-    container.style.width = `${columns * cellSize + columns * 2}px`;
+    container.style.width = `${columns * cellSize}px`;
     this.container = container;
 
     for (let i = 0; i < rows; i++) {
@@ -33,7 +38,7 @@ class HtmlBoard extends Board {
       container.appendChild(row);
     }
 
-    document.body.appendChild(container);
+    content.appendChild(container);
 
     this.container.addEventListener('click', this.handleClick);
   }
@@ -64,6 +69,22 @@ class HtmlBoard extends Board {
       const cell = this.elements[index];
       cell.classList.remove('alive');
     });
+  }
+
+  reset() {
+    super.reset();
+    this.clear();
+  }
+
+  clear() {
+    this.elements.forEach(e => {
+      e.classList.remove('alive');
+    });
+  }
+
+  changeFieldSize() {
+    super.changeFieldSize();
+    this.initialize();
   }
 }
 

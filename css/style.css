@@ -52,6 +52,11 @@ a {
   text-decoration: none;
 }
 
+.content {
+  width: 100%;
+  overflow: scroll;
+}
+
 
 .row {
   display: flex;
