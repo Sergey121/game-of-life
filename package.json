@@ -1,4 +1,5 @@
 {
+  "homepage": "https://sergey121.github.io/game-of-life/",
   "name": "life-game",
   "version": "0.0.1",
   "description": "",
@@ -11,10 +12,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open --config webpack.config.dev.js",
-    "build": "webpack --config webpack.config.prod.js"
+    "build": "webpack --config webpack.config.prod.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
+    "gh-pages": "^6.1.1",
     "html-webpack-plugin": "^5.5.3",
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
