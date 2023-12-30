@@ -128,7 +128,7 @@ class UI {
       exampleEl.innerHTML = `
         <div class="example__header">
           <h3>${example.name}</h3>
-          <button class="example__btn">Use</button>
+          <button class="example__btn button">Use</button>
         </div>
         <div class="example__content">
           <div class="example__description">${example.description}</div>

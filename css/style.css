@@ -17,13 +17,14 @@ html {
   --born-color: rgb(250, 96, 26);
   --bg: rgb(175, 216, 248);
   --bg-light: rgb(202, 230, 253);
+  --primaryColor: #34495e;
 }
 
 
 
 /* App styles */
 .navigation {
-  background-color: #34495e;
+  background-color: var(--primaryColor);
   min-height: 54px;
   display: flex;
   align-items: center;
@@ -45,6 +46,10 @@ html {
 
 .navigation__github {
   margin-left: auto;
+}
+
+.navigation__about {
+  margin-left: 20px;
 }
 
 a {
@@ -83,6 +88,10 @@ a {
   animation-play-state: running;
 }
 
+.example {
+  margin: 20px 0;
+}
+
 .example__row {
   display: flex;
 }
@@ -92,11 +101,19 @@ a {
   height: 20px;
   border: 1px solid var(--bg);
   background-color: white;
-  cursor: pointer;
 }
 
 .example__cell--alive {
   background-color: var(--color);
+}
+
+.button {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primaryColor);
+  color: white;
+  cursor: pointer;
 }
 
 @keyframes fillAnimation {
