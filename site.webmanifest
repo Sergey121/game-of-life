@@ -1,6 +1,6 @@
 {
-  "short_name": "",
-  "name": "",
+  "short_name": "Game of life",
+  "name": "Game of life",
   "icons": [{
     "src": "icon.png",
     "type": "image/png",
