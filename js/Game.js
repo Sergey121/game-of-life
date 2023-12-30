@@ -20,10 +20,10 @@ class Game {
 
     this.#isRunning = true;
 
-    const speed = this.ui.speed;
     let lastTime = 0;
 
     const run = (now) => {
+      const speed = this.ui.speed;
       if (!this.#isRunning) {
         return;
       }

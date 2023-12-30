@@ -1,12 +1,14 @@
 import { Modal } from './Modal';
 import { examples } from './examples';
 
+const defaultSpeed = 100;
+
 class UI {
   #game = null;
   #rows = 100;
   #columns = 100;
   #cellSize = 10;
-  #speed = 100;
+  #speed = defaultSpeed;
 
   #examplesModal = new Modal(() => this.#renderExampleContent());
 
@@ -20,6 +22,7 @@ class UI {
   #numberOfColumnsEl = document.getElementById('numberOfColumns');
   #cellSizeEl = document.getElementById('cellSize');
   #examplesButtonEl = document.getElementById('examplesModal');
+  #speedRangeEl = document.getElementById('speedRange');
 
   constructor(game) {
     this.#game = game;
@@ -51,6 +54,7 @@ class UI {
     this.#numberOfColumnsEl.addEventListener('change', this.#handleChangeColumns);
     this.#cellSizeEl.addEventListener('change', this.#handleChangeCellSize);
     this.#examplesButtonEl.addEventListener('click', this.#handleShowExamples);
+    this.#speedRangeEl.addEventListener('change', this.#handleChangeSpeed);
 
     window.document.querySelectorAll('input[name=\'board_type\']').forEach((el) => {
       el.addEventListener('change', this.#handleBoardTypeChange);
@@ -166,6 +170,11 @@ class UI {
     });
 
     return content;
+  }
+
+  #handleChangeSpeed = (event) => {
+    const value = Number.parseInt(event.target.value);
+    this.#speed = Math.round(defaultSpeed * 10 / value);
   }
 
   updateGeneration(generation) {
