@@ -64,7 +64,7 @@ class Board {
 
   next() {
     this.#runStep();
-    return this.generation;
+    return [this.generation, this.#live.size];
   }
 
   reset() {
@@ -166,6 +166,21 @@ class Board {
     }
 
     return [neighbors, neighbors.filter((neighbor) => neighbor.value === 1)];
+  }
+
+  setBoard(example) {
+    this.reset();
+    this.initialize();
+
+    example.pattern.forEach((row, rowIndex) => {
+      row.forEach((cell, columnIndex) => {
+        if (cell === 1) {
+          const multiplierRows = Math.floor(this.#ui.rows / 2 - example.pattern.length / 2);
+          const multiplierColumns = Math.floor(this.#ui.columns / 2 - row.length / 2);
+          this.onCellClick(rowIndex + multiplierRows, columnIndex + multiplierColumns);
+        }
+      });
+    });
   }
 }
 

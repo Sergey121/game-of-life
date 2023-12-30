@@ -83,6 +83,22 @@ a {
   animation-play-state: running;
 }
 
+.example__row {
+  display: flex;
+}
+
+.example__cell {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--bg);
+  background-color: white;
+  cursor: pointer;
+}
+
+.example__cell--alive {
+  background-color: var(--color);
+}
+
 @keyframes fillAnimation {
   0% {
     transform: scale(0.3);
@@ -97,4 +113,44 @@ a {
   100% {
     transform: scale(1);
   }
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(60, 60, 60, 0.8);
+  transition: background-color 250ms ease;
+  backdrop-filter: blur(3px);
+  z-index: 1000;
+}
+
+.modal__content {
+  max-width: 60em;
+  width: 90vw;
+  max-height: 90vh;
+  background: white;
+  box-shadow: hsla(0, 0%, 0%, 0.3) 5px 5px 5px;
+  padding: 16px;
+  overflow: auto;
+}
+
+.modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__close-btn {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 900;
+  color: #222;
+  border: none;
+  background: none;
 }

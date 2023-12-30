@@ -1,3 +1,6 @@
+import { Modal } from './Modal';
+import { examples } from './examples';
+
 class UI {
   #game = null;
   #rows = 100;
@@ -5,14 +8,18 @@ class UI {
   #cellSize = 10;
   #speed = 100;
 
+  #examplesModal = new Modal(() => this.#renderExampleContent());
+
   #startButton = document.getElementById('startGame');
   #nextButton = document.getElementById('nextGeneration');
   #stopButton = document.getElementById('stopGame');
   #resetButton = document.getElementById('resetGame');
   #generationNumberEl = document.getElementById('generationNumber');
+  #liveNumberEl = document.getElementById('liveNumber');
   #numberOfRowsEl = document.getElementById('numberOfRows');
   #numberOfColumnsEl = document.getElementById('numberOfColumns');
   #cellSizeEl = document.getElementById('cellSize');
+  #examplesButtonEl = document.getElementById('examplesModal');
 
   constructor(game) {
     this.#game = game;
@@ -43,8 +50,9 @@ class UI {
     this.#numberOfRowsEl.addEventListener('change', this.#handleChangeRows);
     this.#numberOfColumnsEl.addEventListener('change', this.#handleChangeColumns);
     this.#cellSizeEl.addEventListener('change', this.#handleChangeCellSize);
+    this.#examplesButtonEl.addEventListener('click', this.#handleShowExamples);
 
-    window.document.querySelectorAll("input[name='board_type']").forEach((el) => {
+    window.document.querySelectorAll('input[name=\'board_type\']').forEach((el) => {
       el.addEventListener('change', this.#handleBoardTypeChange);
     });
   }
@@ -96,8 +104,76 @@ class UI {
     this.#game.changeCellSize();
   }
 
+  #handleShowExamples = () => {
+    this.#examplesModal.showModal();
+  }
+
+  #renderExampleContent = () => {
+    const content = document.createElement('div');
+    content.innerHTML = `
+      <div class="modal__header">
+        <h2>Examples</h2>
+        <button id="closeBtn" class="modal__close-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"></path><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </div>
+      <div class="examples__content"></div>
+    `;
+
+    const examplesContentEl = content.querySelector('.examples__content');
+
+    for (const example of examples) {
+      const exampleEl = document.createElement('div');
+      exampleEl.classList.add('example');
+      exampleEl.innerHTML = `
+        <div class="example__header">
+          <h3>${example.name}</h3>
+          <button class="example__btn">Use</button>
+        </div>
+        <div class="example__content">
+          <div class="example__description">${example.description}</div>
+          <div class="example__board">
+            <div class="example__board-content"></div>
+          </div>
+        </div>
+      `;
+
+      const exampleBoardEl = exampleEl.querySelector('.example__board-content');
+      for (const row of example.pattern) {
+        const rowEl = document.createElement('div');
+        rowEl.classList.add('example__row');
+        for (const cell of row) {
+          const cellEl = document.createElement('div');
+          cellEl.classList.add('example__cell');
+          cellEl.classList.add(cell ? 'example__cell--alive' : 'example__cell--dead');
+          rowEl.appendChild(cellEl);
+        }
+        exampleBoardEl.appendChild(rowEl);
+      }
+
+      exampleEl.querySelector('.example__btn').addEventListener('click', () => {
+        this.#game.setBoard(example);
+        this.#examplesModal.closeModal();
+      });
+
+      examplesContentEl.appendChild(exampleEl);
+    }
+
+
+
+    content.querySelector('#closeBtn').addEventListener('click', () => {
+      this.#examplesModal.closeModal();
+    });
+
+    return content;
+  }
+
   updateGeneration(generation) {
     this.#generationNumberEl.textContent = generation;
+  }
+
+  updateLive(live) {
+    this.#liveNumberEl.textContent = live;
   }
 }
 

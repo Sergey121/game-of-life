@@ -44,13 +44,15 @@ class Game {
   }
 
   next() {
-    const generation = this.board.next();
+    const [generation, live] = this.board.next();
     this.ui.updateGeneration(generation);
+    this.ui.updateLive(live);
   }
 
   reset() {
     this.board.reset();
     this.ui.updateGeneration(0);
+    this.ui.updateLive(0);
   }
 
   changeFieldSize() {
@@ -66,7 +68,12 @@ class Game {
 
   changeCellSize() {
     this.reset();
-    this.initialize();
+    this.board.initialize();
+  }
+
+  setBoard(example) {
+    this.reset();
+    this.board.setBoard(example);
   }
 }
 
