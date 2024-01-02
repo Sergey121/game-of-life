@@ -9,6 +9,7 @@ class CanvasBoard extends Board {
   #canvas = null;
   #context = null;
   #prevSelectedCell = null;
+  #isPainting = false;
 
   initialize() {
     super.initialize();
@@ -31,8 +32,14 @@ class CanvasBoard extends Board {
       }
     }
 
+    canvas.addEventListener('mousedown', event => {
+      this.#isPainting = true;
+      this.#handleMouseClick(event);
+    });
     canvas.addEventListener('mousemove', this.#handleMouseMove);
-    canvas.addEventListener('mousedown', this.#handleMouseClick);
+    canvas.addEventListener('mouseup', () => {
+      this.#isPainting = false;
+    });
 
     content.appendChild(canvas);
   }
@@ -82,7 +89,7 @@ class CanvasBoard extends Board {
     const row = Math.floor(y / this.ui.cellSize);
     const column = Math.floor(x / this.ui.cellSize);
 
-    if (event.buttons === 1) {
+    if (this.#isPainting) {
       if (!this.#prevSelectedCell || this.#prevSelectedCell[0] !== row || this.#prevSelectedCell[1] !== column) {
         this.onCellClick(row, column);
       }
